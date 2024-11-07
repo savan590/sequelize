@@ -1,0 +1,213 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Excel</title>
+</head>
+<body>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" accept=".xlsx, .xls" required />
+        <button type="submit">Upload</button>
+    </form>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+
+            try {
+                const response = await fetch('http://localhost:3001/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                alert(result.message);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while uploading the file.');
+            }
+        });
+    </script>
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register and Upload Excel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register and Upload Excel</h2>
+        <form id="registerForm" enctype="multipart/form-data">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <label for="fileInput">Upload Excel:</label>
+            <input type="file" id="fileInput" name="file" accept=".xlsx, .xls" required />
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <form id="registerForm" class="regform">
+            <input type="text" id="firstName" placeholder="First Name" required><br>
+            <input type="text" id="lastName" placeholder="Last Name" required><br>
+            <input type="email" id="email" placeholder="Email" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required><br>
+            <input type="text" id="pincode" placeholder="Pincode" required><br>
+            <input type="number" id="age" placeholder="Age" required><br>
+            <input type="tel" id="phone" placeholder="Phone" required><br>
+            <input type="text" id="city" placeholder="City" required><br>
+            <button type="submit">Register</button>
+        </form>
+        <br>
+        <a href="http://localhost:3001/auth/google">Register with Google</a><br>
+        <a href="http://localhost:3001/auth/microsoft">Register with MICROSOFT</a>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                // firstName: document.getElementById('firstName').value,
+                // lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                confirmPassword: document.getElementById('confirmPassword').value,
+                pincode: document.getElementById('pincode').value,
+                age: document.getElementById('age').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+            };
+            // let lowerCaseLetters = /[a-z]/g;
+            // let upperCaseLetters = /[A-Z]/g;
+            // let numbers = /\d/g;
+            // let validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+            // if (formData.password !== formData.confirmPassword) {
+            //     alert('Passwords do not match');
+            //     return;
+            // } else if (!email.match(validRegex)) {
+            //     alert('Email is not valid');
+            //     return;
+            // } else if (formData.password.length > 8) {
+            //     alert('Password must be a maximum of 8 characters');
+            //     return;
+            // } else if (!formData.password.match(numbers)) {
+            //     alert('Password must contain at least 1 number');
+            //     return;
+            // } else if (!formData.password.match(upperCaseLetters)) {
+            //     alert('Password must contain at least 1 uppercase letter');
+            //     return;
+            // } else if (!formData.password.match(lowerCaseLetters)) {
+            //     alert('Password must contain at least 1 lowercase letter');
+            //     return;
+            // }
+            const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            const nameRegex = /^[a-zA-Z]+$/; // Regex to check for alphabetic characters only
+            const numericRegex = /^[0-9]+$/; // Regex to check for numeric characters only
+            const phoneRegex = /^[0-9]{10}$/; // Regex to check for exactly 10 digits
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{4,}$/;
+            // Validation checks
+            if (formData.password !== formData.confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            if (!formData.password.match(passwordRegex)) {
+                alert('Password must contain at least one capital letter and one digit, and be at least 4 characters long');
+                return;
+            }
+
+            if (!formData.email.match(validEmailRegex)) {
+                alert('Email is not valid');
+                return;
+            }
+
+            if (!formData.city.match(nameRegex)) {
+                alert('City should only contain alphabetic characters');
+                return;
+            }
+
+            if (!formData.pincode.match(numericRegex)) {
+                alert('Pincode should only contain numbers');
+                return;
+            }
+
+            if (!formData.age.match(numericRegex)) {
+                alert('Age should only contain numbers');
+                return;
+            }
+
+            if (!formData.phone.match(phoneRegex)) {
+                alert('Phone number should be 10 digit only');
+                return;
+            }
+
+            const response = await fetch('http://localhost:3001/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                window.location.href = 'login.html';
+            } else {
+                const error = await response.json();
+                alert(error.error);
+            }
+        });
+    </script>
+</body>
+
+</html>

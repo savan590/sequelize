@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Profile</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: aliceblue;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: circle;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Complete Profile</h2>
+        <form id="completeProfileForm">
+            <!-- <input type="password" id="password" placeholder="password" required><br> -->
+            <input type="text" id="pincode" placeholder="Pincode" required><br>
+            <input type="number" id="age" placeholder="Age" required><br>
+            <input type="tel" id="phone" placeholder="Phone" required><br><input type="text" id="city" placeholder="City" required><br>
+            <button type="submit">Complete Profile</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('completeProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                // password: document.getElementById('password').value,
+                pincode: document.getElementById('pincode').value,
+                age: document.getElementById('age').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+            };
+
+            const nameRegex = /^[a-zA-Z]+$/; 
+            const numericRegex = /^[0-9]+$/; 
+            const phoneRegex = /^[0-9]{10}$/; 
+
+            if (!formData.city.match(nameRegex)) {
+                alert('City should only contain alphabetic characters');
+                return;
+            }
+
+            if (!formData.pincode.match(numericRegex)) {
+                alert('Pincode should only contain numbers');
+                return;
+            }
+
+            if (!formData.age.match(numericRegex)) {
+                alert('Age should only contain numbers');
+                return;
+            }
+
+            if (!formData.phone.match(phoneRegex)) {
+                alert('Phone number should be 10 digit only');
+                return;
+            }
+
+            const response = await fetch('http://localhost:3001/auth/complete-profile', {
+
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                window.location.href = 'home.html';
+            }
+
+            else {
+                const error = await response.json();
+                alert(error.error);
+            }
+        });
+    </script>
+</body>
+
+</html>

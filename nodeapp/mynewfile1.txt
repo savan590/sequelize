@@ -1,0 +1,13 @@
+Hello content!Hello content!
+-- create table clientdata(
+-- 	id serial primary key,
+-- 	name varchar(255),
+-- 	age integer,
+-- 	city varchar(255)
+-- );
+
+-- create table users(
+-- 	id serial primary key,
+-- 	email varchar(255),
+-- 	password varchar(255)
+-- );
